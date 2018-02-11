@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" media="all" href="../stylesheets/staff.css"/>
-    <title>BBHS-STAFF AREA</title>
-  </head>
-  <body>
-    <header>
-      <h1> BBHS- STAFF AREA</h1>
-    </header>
+<?php require_once ('../../private/intialize.php') ?>
+<?php $page_title = 'Staff Menu'; ?>
+<?php include(SHARED_PATH.'/staff_header.php') ?>
 
-    <navigation>
-      <ul>
-          <li><a href="index.php">Menu </a></li>
-      </ul>
-    </navigation>
+<div id="content">
+  <div id="main-menu">
+    <h2> Main Menu</h2>
+    <ul>
+      <li> <a href= "subjects/index.php">Subjects</a>
+    </ul>
+  </div>
+</div>
 
-    <div id="content">
-
-    </div>
-
-    <footer>
-      &copy;<?php echo date('Y'); ?> BBHS,Patna
-    </footer>
-
-
-  </body>
-</html>
+<?php include(SHARED_PATH.'/staff_footer.php') ?>
