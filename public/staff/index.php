@@ -7,6 +7,7 @@
     <h2> Main Menu</h2>
     <ul>
       <li> <a href= "subjects/index.php">Subjects</a>
+        <li> <a href= "pages/index.php">Pages</a>
     </ul>
   </div>
 </div>
