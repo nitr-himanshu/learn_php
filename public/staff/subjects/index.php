@@ -1,11 +1,6 @@
 <?php require_once ('../../../private/intialize.php') ?>
 <?php
-$subjects=[
-['id'=>'1', 'position'=>'1','visible'=>'1' ,'menu_name'=>'About us'],
-['id'=>'2', 'position'=>'2', 'visible'=>'1' ,'menu_name'=>'Student'],
-['id'=>'3', 'position'=>'3', 'visible'=>'1' ,'menu_name'=>'Teachers'],
-['id'=>'4', 'position'=>'4', 'visible'=>'1' ,'menu_name'=>'Commerical'],
-];
+$subject_set=find_all_subjects();
 ?>
 <?php $page_title = 'Subjects'; ?>
 <?php include(SHARED_PATH.'/staff_header.php') ?>
@@ -27,7 +22,7 @@ $subjects=[
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php foreach($subjects as $subject){ ?>
+            <?php while($subject=mysqli_fetch_assoc($subject_set)){ ?>
                 <tr>
                     <td><?php echo h($subject['id']); ?></td>
                     <td><?php echo h($subject['position']); ?></td>
