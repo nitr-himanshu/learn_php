@@ -2,6 +2,21 @@
 $page_title="Edit Subjects";
 include(SHARED_PATH.'/staff_header.php');
 ?>
+<?php
+if(!isset($_GET['id'])){
+  redirect_to(url_for("/staff/subjects/index.php"));
+}
+$menu_name="";
+$position='';
+$visible='';
+if(is_post_request()){
+extract($_POST);
+echo "Form parameter<br />";
+echo "Menu Name ".$menu_name."<br/>";
+echo "Position ".$position."<br/>";
+echo "Visible ".$visible."<br/>";
+}
+ ?>
 
 <div id="content">
   <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php');?>">&laquo;Back to list</a>
@@ -10,19 +25,19 @@ include(SHARED_PATH.'/staff_header.php');
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>'
-      <dd> <input type="text" name="menu_name" value=""> </dd>
+      <dd> <input type="text" name="menu_name" value="<?php echo h($menu_name);?>"> </dd>
     </dl>
     <dl>
       <dt>Position</dt>
       <dd> <select class="" name="position">
-        <option value="1">1</option>
+        <option value="1" >1 <?php if($position=="1"){echo " Selected";}?></option>
       </select> </dd>
     </dl>
     <dl>
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
-        <input type="checkbox" name="visible" value="1">
+        <input type="checkbox" name="visible" value="1" ><?php if($visible=="1"){ echo " Checked";} ?>
       </dd>
     </dl>
     <div class="" id="operations">
