@@ -1,21 +1,26 @@
-<?php require_once('../../../private/intialize.php');
-$page_title="Edit Subjects";
-include(SHARED_PATH.'/staff_header.php');
-?>
+<?php require_once('../../../private/intialize.php');?>
 <?php
 if(!isset($_GET['id'])){
   redirect_to(url_for("/staff/subjects/index.php"));
 }
-$menu_name="";
-$position='';
-$visible='';
+$id=$_GET["id"];
+
 if(is_post_request()){
 extract($_POST);
-echo "Form parameter<br />";
-echo "Menu Name ".$menu_name."<br/>";
-echo "Position ".$position."<br/>";
-echo "Visible ".$visible."<br/>";
+$subject=[];
+$subject['id']=$id;
+$subject['menu_name']=$menu_name;
+$subject['position']=$position;
+$subject['visible']=$visible;
+$result=update_subject($subject);
+redirect_to(url_for("/staff/subjects/show.php?id=".$id));
 }
+else{
+  $subject=find_subject_by_id($id);
+}
+
+$page_title="Edit Subjects";
+include(SHARED_PATH.'/staff_header.php');
  ?>
 
 <div id="content">
@@ -25,19 +30,19 @@ echo "Visible ".$visible."<br/>";
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>'
-      <dd> <input type="text" name="menu_name" value="<?php echo h($menu_name);?>"> </dd>
+      <dd> <input type="text" name="menu_name" value="<?php echo h($subject['menu_name']);?>"> </dd>
     </dl>
     <dl>
       <dt>Position</dt>
       <dd> <select class="" name="position">
-        <option value="1" >1 <?php if($position=="1"){echo " Selected";}?></option>
+        <option value="1" >1 <?php if($subject['position']=="1"){echo " Selected";}?></option>
       </select> </dd>
     </dl>
     <dl>
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
-        <input type="checkbox" name="visible" value="1" ><?php if($visible=="1"){ echo " Checked";} ?>
+        <input type="checkbox" name="visible" value="1" ><?php if($subject['visible']=="1"){ echo " Checked";} ?>
       </dd>
     </dl>
     <div class="" id="operations">

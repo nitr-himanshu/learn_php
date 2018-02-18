@@ -13,6 +13,9 @@
       <h1>3 Grid Example</h1>
       <div class="row">
         <div class="col-md-4" style="background-color: #FF0099">
+          <div class="list-inline">
+            himanshu kumar keshri
+          </div>
           Left
         </div>
         <div class="col-md-4" style="background-color: #AABBCC">
