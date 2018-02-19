@@ -1,7 +1,12 @@
 <?php require_once('../../../private/intialize.php');
-$page_title="Create Subjects";
-include(SHARED_PATH.'/staff_header.php');
+$subject_count=find_no_of_subject()+1;
+$subject=[];
+$subject['position']=$subject_count;
 ?>
+
+<?php $page_title="Create Subjects";
+include(SHARED_PATH.'/staff_header.php');
+ ?>
 
 <div id="content">
   <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php');?>">&laquo;Back to list</a>
@@ -14,9 +19,19 @@ include(SHARED_PATH.'/staff_header.php');
     </dl>
     <dl>
       <dt>Position</dt>
-      <dd> <select class="" name="position">
-        <option value="1">1</option>
-      </select> </dd>
+      <dd>
+        <select class="" name="position">
+        <?php
+        for ($i=1;$i<=$subject_count;$i++){
+          echo "<option value=\"{$i}\"";
+          if($subject["position"]==$i){
+            echo " selected";
+          }
+          echo ">{$i}</option>";
+        }
+         ?>
+       </select>
+      </dd>
     </dl>
     <dl>
       <dt>Visible</dt>

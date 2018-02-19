@@ -4,7 +4,11 @@ require_once('../../../private/intialize.php');
 
 if(is_post_request()){
 extract($_POST);
-$result=insert_subject($menu_name,$position,$visible);
+$subject=[];
+$subject['menu_name']=$menu_name;
+$subject['position']=$position;
+$subject['visible']=$visible;
+$result=insert_subject($subject);
 $new_id=mysqli_insert_id($db);
 redirect_to(url_for('/staff/subjects/show.php?id='.$new_id));
 

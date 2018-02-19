@@ -17,6 +17,7 @@ redirect_to(url_for("/staff/subjects/show.php?id=".$id));
 }
 else{
   $subject=find_subject_by_id($id);
+  $subject_count=find_no_of_subject();
 }
 
 $page_title="Edit Subjects";
@@ -34,9 +35,19 @@ include(SHARED_PATH.'/staff_header.php');
     </dl>
     <dl>
       <dt>Position</dt>
-      <dd> <select class="" name="position">
-        <option value="1" >1 <?php if($subject['position']=="1"){echo " Selected";}?></option>
-      </select> </dd>
+      <dd>
+        <select class="" name="position">
+          <?php
+          for ($i=1;$i<=$subject_count;$i++){
+            echo "<option value=\"{$i}\"";
+            if($subject["position"]==$i){
+              echo " selected";
+            }
+            echo ">{$i}</option>";
+          }
+           ?>
+      </select>
+     </dd>
     </dl>
     <dl>
       <dt>Visible</dt>
