@@ -73,6 +73,23 @@ function update_subject($subject){
   }
 }
 
+function delete_subject($id){
+  global $db;
+  $sql = "DELETE FROM subjects ";
+  $sql.= "WHERE id='".$id."' ";
+  $sql.="LIMIT 1";
+  echo $sql;
+  $result=mysqli_query($db,$sql);
+  if($result){
+    return true;
+  }
+  else{
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+}
+
 function find_all_pages(){
   global $db;
 
@@ -97,13 +114,13 @@ function find_page_by_id($id){
 function insert_page($page){
   global $db;
   $sql="INSERT INTO pages ";
-  $sql.= "(subject_id,menu_name, position, visible,content) ";
+  $sql.= "(menu_name, position, visible,content,subject_id) ";
   $sql.="VALUES(";
-  $sql.= "'".$page['subject_id']."', ";
   $sql.= "'".$page['menu_name']."', ";
   $sql.= "'".$page['position']."', ";
   $sql.= "'".$page['visible']."',";
-  $sql.= "'".$page['content']."'";
+  $sql.= "'".$page['content']."', ";
+  $sql.= "'".$page['subject_id']."'";
   $sql.=")";
 
   $result=mysqli_query($db,$sql);
@@ -129,7 +146,7 @@ function find_no_of_pages(){
 function update_page($page){
   global $db;
   $sql = "UPDATE pages SET ";
-  $sql.= "subject_id= '".$page['subject_id']."', ";
+  $sql.= "subject_id= '".$page['id']."', ";
   $sql.= "menu_name= '".$page['menu_name']."', ";
   $sql.= "position= '".$page['position']."', ";
   $sql.= "visible= '".$page['visible']."', ";

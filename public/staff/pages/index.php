@@ -14,7 +14,7 @@ $page_set=find_all_pages();
         <table class="list">
             <tr>
                 <th>ID</th>
-                <th>subject_id</th>
+                <th>Subject</th>
                 <th>Position</th>
                 <th>Visible</th>
                 <th>Name</th>
@@ -23,10 +23,12 @@ $page_set=find_all_pages();
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php while($page=mysqli_fetch_assoc($page_set)){ ?>
+            <?php while($page=mysqli_fetch_assoc($page_set)){
+                $subject=find_subject_by_id($page['subject_id']);
+            ?>
                 <tr>
                     <td><?php echo h($page['id']); ?></td>
-                    <td> <?php echo h($page['subject_id']); ?> </td>
+                    <td> <?php echo h($subject['menu_name']); ?> </td>
                     <td><?php echo h($page['position']); ?></td>
                     <td><?php echo $page['visible']==1?'true':'false';?></td>
                     <td><?php echo h($page['menu_name']); ?></td>

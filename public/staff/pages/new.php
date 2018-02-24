@@ -1,5 +1,7 @@
 <?php require_once('../../../private/intialize.php');
 $page_count=find_no_of_pages();
+$subject_count=find_no_of_subject();
+$subject_set=find_all_subjects();
 $page=[];
 $page['menu_name']='';
 $page['visible']='';
@@ -8,8 +10,10 @@ if(is_post_request()){
 extract($_POST);
 $page=[];
 $page['menu_name']=$menu_name;
+$page['subject_id']=$subject_id;
 $page['position']=$position;
 $page['visible']=$visible;
+$page['content']=$content;
 $result=insert_page($page);
 $new_id=mysqli_insert_id($db);
 redirect_to(url_for('/staff/pages/show.php?id='.$new_id));
@@ -24,7 +28,7 @@ include(SHARED_PATH.'/staff_header.php');
   <h1>Create Pages</h1>
   <form class="" action="" method="post">
     <dl>
-      <dt>Menu Name</dt>'
+      <dt>Menu Name</dt>
       <dd> <input type="text" name="menu_name" value="<?php echo h($page['menu_name']);?>"> </dd>
     </dl>
     <dl>
@@ -32,7 +36,7 @@ include(SHARED_PATH.'/staff_header.php');
       <dd>
         <select class="" name="position">
           <?php
-          for ($i=1;$i<=$page_count;$i++){
+          for ($i=1;$i<=$page_count+1;++$i){
             echo "<option value=\"{$i}\"";
             if($page["position"]==$i){
               echo " selected";
@@ -44,10 +48,28 @@ include(SHARED_PATH.'/staff_header.php');
     </dd>
     </dl>
     <dl>
+      <dt>Subject</dt>
+      <dd>
+        <select class="" name="subject_id">
+          <?php while($subject=mysqli_fetch_assoc($subject_set)){ ?>
+              <option value="<?php echo h($subject['id']); ?>">
+                  <?php echo h($subject['menu_name']); ?>
+              </option>
+          <?php } ?>
+      </select>
+    </dd>
+    </dl>
+    <dl>
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
         <input type="checkbox" name="visible" value="1" <?php if($page['visible']=="1"){ echo "Checked";} ?> >
+      </dd>
+    </dl>
+    <dl>
+      <dt>Content</dt>
+      <dd>
+        <input type="textbox" name="content" style="height:250px; width:250px;" />
       </dd>
     </dl>
     <div class="" id="operations">

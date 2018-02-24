@@ -8,9 +8,11 @@ if(is_post_request()){
 extract($_POST);
 $pages=[];
 $pages['id']=$id;
+$pages['subject_id']=$subject_id;
 $pages['menu_name']=$menu_name;
 $pages['position']=$position;
 $pages['visible']=$visible;
+$pages['content']=$content;
 $result=update_page($pages);
 redirect_to(url_for("/staff/pages/show.php?id=".$id));
 }
@@ -48,11 +50,29 @@ else{
     </dd>
     </dl>
     <dl>
+      <dt>Subject</dt>
+      <dd>
+        <select class="" name="subject_id">
+          <?php while($subject=mysqli_fetch_assoc($subject_set)){ ?>
+              <option value="<?php echo h($subject['id']); ?>">
+                  <?php echo h($subject['menu_name']); ?>
+              </option>
+          <?php } ?>
+      </select>
+    </dd>
+    </dl>
+    <dl>
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
         <input type="checkbox" name="visible" value="1">
         <?php if($page['visible']=="1"){ echo " Checked";} ?>
+      </dd>
+    </dl>
+    <dl>
+      <dt>Content</dt>
+      <dd>
+        <input type="textbox" name="content"  value="<?php echo h($page['content']);?>" style="height:250px; width:250px;" />
       </dd>
     </dl>
     <div class="" id="operations">
