@@ -34,7 +34,7 @@ $page_set=find_all_pages();
                     <td><?php echo h($page['menu_name']); ?></td>
                     <td><a href="<?php echo url_for("/staff/pages/show.php?id=".h(u($page['id'])));?>" class="action">View</a> </td>
                     <td><a href="<?php echo url_for("/staff/pages/edit.php?id=".h(u($page['id']))) ?>" class="action">Edit</a> </td>
-                    <td><a href="#" class="action">Delete</a> </td>
+                    <td><a href="<?php echo url_for("/staff/pages/delete.php?id=".h(u($page['id'])));?>" class="action">Delete</a> </td>
                 </tr>
             <?php } ?>
         </table>

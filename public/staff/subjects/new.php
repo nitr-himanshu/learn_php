@@ -15,7 +15,7 @@ include(SHARED_PATH.'/staff_header.php');
   <form class="" action="<?php echo url_for('/staff/subjects/create.php');?>" method="post">
     <dl>
       <dt>Menu Name</dt>'
-      <dd> <input type="text" name="menu_name" value=""> </dd>
+      <dd> <input type="text" name="menu_name" value="" autofocus> </dd>
     </dl>
     <dl>
       <dt>Position</dt>

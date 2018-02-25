@@ -53,7 +53,7 @@ include(SHARED_PATH.'/staff_header.php');
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
-        <input type="checkbox" name="visible" value="1" ><?php if($subject['visible']=="1"){ echo " Checked";} ?>
+        <input type="checkbox" name="visible" value="1" <?php if($subject['visible']=="1"){ echo " checked";} ?>>
       </dd>
     </dl>
     <div class="" id="operations">

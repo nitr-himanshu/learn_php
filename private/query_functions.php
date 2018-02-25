@@ -146,7 +146,7 @@ function find_no_of_pages(){
 function update_page($page){
   global $db;
   $sql = "UPDATE pages SET ";
-  $sql.= "subject_id= '".$page['id']."', ";
+  $sql.= "subject_id= '".$page['subject_id']."', ";
   $sql.= "menu_name= '".$page['menu_name']."', ";
   $sql.= "position= '".$page['position']."', ";
   $sql.= "visible= '".$page['visible']."', ";
@@ -169,10 +169,9 @@ function update_page($page){
 function delete_page($id){
   global $db;
   $sql="DELETE FROM pages ";
-  $sql.="WHERE id'".$id."' ";
+  $sql.="WHERE id='".$id."' ";
   $sql.="LIMIT 1";
   $result = mysqli_query($db,$sql);
-
   if($result){
     return true;
   }

@@ -5,7 +5,7 @@ $subject_set=find_all_subjects();
 $page=[];
 $page['menu_name']='';
 $page['visible']='';
-$page['position']=$page_count;
+$page['position']=$page_count+1;
 if(is_post_request()){
 extract($_POST);
 $page=[];
@@ -29,14 +29,14 @@ include(SHARED_PATH.'/staff_header.php');
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>
-      <dd> <input type="text" name="menu_name" value="<?php echo h($page['menu_name']);?>"> </dd>
+      <dd> <input type="text" name="menu_name" value="<?php echo h($page['menu_name']);?>" autofocus> </dd>
     </dl>
     <dl>
       <dt>Position</dt>
       <dd>
         <select class="" name="position">
           <?php
-          for ($i=1;$i<=$page_count+1;++$i){
+          for ($i=1;$i<=$page_count+1;$i++){
             echo "<option value=\"{$i}\"";
             if($page["position"]==$i){
               echo " selected";
@@ -69,7 +69,7 @@ include(SHARED_PATH.'/staff_header.php');
     <dl>
       <dt>Content</dt>
       <dd>
-        <input type="textbox" name="content" style="height:250px; width:250px;" />
+        <input type="textbox" name="content" />
       </dd>
     </dl>
     <div class="" id="operations">

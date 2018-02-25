@@ -3,7 +3,12 @@
 if(!isset($_GET['id'])){
   redirect_to(url_for("/staff/pages/index.php"));
 }
+
 $id=$_GET['id'];
+$page = find_page_by_id($id);
+$pages_count=find_no_of_pages($id);
+$subject_set=find_all_subjects();
+
 if(is_post_request()){
 extract($_POST);
 $pages=[];
@@ -15,10 +20,6 @@ $pages['visible']=$visible;
 $pages['content']=$content;
 $result=update_page($pages);
 redirect_to(url_for("/staff/pages/show.php?id=".$id));
-}
-else{
-  $page = find_page_by_id($id);
-  $pages_count=find_no_of_pages($id);
 }
  ?>
 
@@ -52,9 +53,11 @@ else{
     <dl>
       <dt>Subject</dt>
       <dd>
-        <select class="" name="subject_id">
+        <select name="subject_id">
           <?php while($subject=mysqli_fetch_assoc($subject_set)){ ?>
-              <option value="<?php echo h($subject['id']); ?>">
+              <option value="<?php echo h($subject['id']);?>"
+                <?php if($page['subject_id']==$subject['id']) echo " selected"; ?>
+                >
                   <?php echo h($subject['menu_name']); ?>
               </option>
           <?php } ?>
@@ -65,14 +68,14 @@ else{
       <dt>Visible</dt>
       <dd>
         <input type="hidden" name="visible" value="0">
-        <input type="checkbox" name="visible" value="1">
-        <?php if($page['visible']=="1"){ echo " Checked";} ?>
+        <input type="checkbox" name="visible" value="1"
+        <?php if($page['visible']=="1"){ echo " checked";} ?>>
       </dd>
     </dl>
     <dl>
       <dt>Content</dt>
       <dd>
-        <input type="textbox" name="content"  value="<?php echo h($page['content']);?>" style="height:250px; width:250px;" />
+        <input type="textbox" name="content"  value="<?php echo h($page['content']);?>"/>
       </dd>
     </dl>
     <div class="" id="operations">
