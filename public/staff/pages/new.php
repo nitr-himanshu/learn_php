@@ -24,7 +24,7 @@ include(SHARED_PATH.'/staff_header.php');
 ?>
 <div id="content">
   <a class="back-link" href="<?php echo url_for('/staff/pages/index.php');?>">&laquo;Back to list</a>
-  <div class="subject new">
+  <div class="page new">
   <h1>Create Pages</h1>
   <form class="" action="" method="post">
     <dl>
@@ -69,7 +69,7 @@ include(SHARED_PATH.'/staff_header.php');
     <dl>
       <dt>Content</dt>
       <dd>
-        <input type="textbox" name="content" />
+        <textarea type="textbox" name="content" rows="5" style="width:250px"/></textarea>
       </dd>
     </dl>
     <div class="" id="operations">

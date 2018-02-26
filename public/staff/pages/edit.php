@@ -17,7 +17,7 @@ $pages['subject_id']=$subject_id;
 $pages['menu_name']=$menu_name;
 $pages['position']=$position;
 $pages['visible']=$visible;
-$pages['content']=$content;
+$pages['content']=h($content);
 $result=update_page($pages);
 redirect_to(url_for("/staff/pages/show.php?id=".$id));
 }
@@ -28,7 +28,7 @@ redirect_to(url_for("/staff/pages/show.php?id=".$id));
   ?>
 <div id="content">
   <a class="back-link" href="<?php echo url_for('/staff/pages/index.php');?>">&laquo;Back to list</a>
-  <div class="subject new">
+  <div class="page edit">
   <h1>Edit Pages</h1>
   <form class="" action="" method="post">
     <dl>
@@ -75,7 +75,7 @@ redirect_to(url_for("/staff/pages/show.php?id=".$id));
     <dl>
       <dt>Content</dt>
       <dd>
-        <input type="textbox" name="content"  value="<?php echo h($page['content']);?>"/>
+        <textarea type="textbox" name="content" rows="8" cols="50"/><?php echo h($page['content']);?></textarea>
       </dd>
     </dl>
     <div class="" id="operations">
