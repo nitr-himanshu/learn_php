@@ -13,7 +13,13 @@ $subject['menu_name']=$menu_name;
 $subject['position']=$position;
 $subject['visible']=$visible;
 $result=update_subject($subject);
-redirect_to(url_for("/staff/subjects/show.php?id=".$id));
+if($result ===  true){
+  redirect_to(url_for("/staff/subjects/show.php?id=".$id));
+} else{
+  $errors=$result;
+  var_dump($errors);
+}
+
 }
 else{
   $subject=find_subject_by_id($id);
@@ -30,7 +36,7 @@ include(SHARED_PATH.'/staff_header.php');
   <h1>Edit Subjects</h1>
   <form class="" action="" method="post">
     <dl>
-      <dt>Menu Name</dt>'
+      <dt>Menu Name</dt>
       <dd> <input type="text" name="menu_name" value="<?php echo h($subject['menu_name']);?>"> </dd>
     </dl>
     <dl>
