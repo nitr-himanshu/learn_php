@@ -15,7 +15,9 @@
       <div class="row">
         <div class="col-md-4" style="background-color: #FF0099">
           <div class="list-inline">
-            himanshu kumar keshri
+          Rohit kumar
+Sanket Kamta
+	
           </div>
           Left
         </div>
