@@ -22,6 +22,7 @@ function find_subject_by_id($id){
 
 function insert_subject($subject){
   global $db;
+
   $errors=validate_subject($subject);
   if(!empty($errors)){
     return $errors;
@@ -129,7 +130,6 @@ function validate_subject($subject){
   return $errors;
 
 }
-
 
 function find_all_pages(){
   global $db;

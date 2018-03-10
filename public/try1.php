@@ -15,9 +15,6 @@
       <div class="row">
         <div class="col-md-4" style="background-color: #FF0099">
           <div class="list-inline">
-          Rohit kumar
-Sanket Kamta
-	
           </div>
           Left
         </div>

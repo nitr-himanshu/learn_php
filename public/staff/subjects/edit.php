@@ -6,19 +6,24 @@ if(!isset($_GET['id'])){
 $id=$_GET["id"];
 
 if(is_post_request()){
-extract($_POST);
-$subject=[];
-$subject['id']=$id;
-$subject['menu_name']=$menu_name;
-$subject['position']=$position;
-$subject['visible']=$visible;
-$result=update_subject($subject);
-if($result ===  true){
-  redirect_to(url_for("/staff/subjects/show.php?id=".$id));
-} else{
-  $errors=$result;
-  var_dump($errors);
-}
+  $id="";
+  $menu_name="";
+  $position="";
+  $visible="";
+  extract($_POST);
+  
+  $subject=[];
+  $subject['id']=$id;
+  $subject['menu_name']=$menu_name;
+  $subject['position']=$position;
+  $subject['visible']=$visible;
+  $result=update_subject($subject);
+  if($result ===  true){
+    redirect_to(url_for("/staff/subjects/show.php?id=".$id));
+  } else{
+    $errors=$result;
+    var_dump($errors);
+  }
 
 }
 else{
