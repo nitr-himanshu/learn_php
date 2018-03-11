@@ -1,4 +1,31 @@
 <?php
+
+function error_400(){
+  header($_SERVER["SERVER_PROTOCOL"]."400 Not Found");
+  exit();
+}
+
+function error_500(){
+  header($_SERVER["SERVER_PROTOCOL"]."500 Internal Server Error");
+  exit();
+}
+
+function display_errors($errors=array()){
+  $output ='';
+  if(!empty($errors)){
+    $output.="<div class=\"errors\">";
+    $output.="Please fix the following errors";
+    $output.="<ul>";
+    foreach($errors as $error){
+      $output.="<li>".h($error)."</li>";
+    }
+    $output.="</ul>";
+    $output.="</div>";
+  }
+  return $output;
+}
+
+
 function url_for($script_path){
   // add the leading '/' if not present
   if($script_path[0]!='/')
@@ -20,18 +47,6 @@ function h($string="")
 {
   return htmlspecialchars("$string");
 }
-
-function error_400(){
-  header($_SERVER["SERVER_PROTOCOL"]."400 Not Found");
-  exit();
-}
-
-
-function error_500(){
-  header($_SERVER["SERVER_PROTOCOL"]."500 Internal Server Error");
-  exit();
-}
-
 
 function redirect_to($location){
   header("Location:". $location);

@@ -1,4 +1,23 @@
 <?php require_once('../../../private/intialize.php');
+
+if(is_post_request()){
+  extract($_POST);
+  $subject=[];
+  $subject['menu_name']=$menu_name;
+  $subject['position']=$position;
+  $subject['visible']=$visible;
+  $result=insert_subject($subject);
+  if($result === true){
+    $new_id=mysqli_insert_id($db);
+    redirect_to(url_for('/staff/subjects/show.php?id='.$new_id));
+  }
+  else{
+    $errors=$result;
+  }
+
+}
+
+
 $subject_count=find_no_of_subject()+1;
 $subject=[];
 $subject['position']=$subject_count;
@@ -12,7 +31,9 @@ include(SHARED_PATH.'/staff_header.php');
   <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php');?>">&laquo;Back to list</a>
   <div class="subject new">
   <h1>Create Subjects</h1>
-  <form class="" action="<?php echo url_for('/staff/subjects/create.php');?>" method="post">
+  <?php echo display_errors($errors); ?>
+
+  <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>'
       <dd> <input type="text" name="menu_name" value="" autofocus> </dd>

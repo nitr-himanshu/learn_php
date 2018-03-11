@@ -6,12 +6,11 @@ if(!isset($_GET['id'])){
 $id=$_GET["id"];
 
 if(is_post_request()){
-  $id="";
   $menu_name="";
   $position="";
   $visible="";
   extract($_POST);
-  
+
   $subject=[];
   $subject['id']=$id;
   $subject['menu_name']=$menu_name;
@@ -22,14 +21,14 @@ if(is_post_request()){
     redirect_to(url_for("/staff/subjects/show.php?id=".$id));
   } else{
     $errors=$result;
-    var_dump($errors);
+    //var_dump($errors);
   }
 
 }
 else{
   $subject=find_subject_by_id($id);
-  $subject_count=find_no_of_subject();
 }
+$subject_count=find_no_of_subject();
 
 $page_title="Edit Subjects";
 include(SHARED_PATH.'/staff_header.php');
@@ -39,6 +38,9 @@ include(SHARED_PATH.'/staff_header.php');
   <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php');?>">&laquo;Back to list</a>
   <div class="subject new">
   <h1>Edit Subjects</h1>
+
+  <?php echo display_errors($errors); ?>
+
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>
