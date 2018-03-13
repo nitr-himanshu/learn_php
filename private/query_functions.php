@@ -154,6 +154,11 @@ function find_page_by_id($id){
 
 function insert_page($page){
   global $db;
+  $errors=validate_page($page);
+  if(!empty($errors)){
+    return $errors;
+  }
+  
   $sql="INSERT INTO pages ";
   $sql.= "(menu_name, position, visible,content,subject_id) ";
   $sql.="VALUES(";
@@ -222,4 +227,51 @@ function delete_page($id){
     exit;
   }
 }
+
+
+
+
+function validate_page($page){
+  $errors=[];
+
+  //subject_id
+  if(is_blank($page['subject_id'])){
+    $errors="Please select Subject id";
+  }
+
+  //menu name
+  if(is_blank($page['menu_name'])){
+    $errors[]="Name cannot be blank.";
+  }
+  elseif(!has_length($page['menu_name'],['min'=>2, 'max'=>255])){
+    $errors[]="Name must be between 2 and 255 characters";
+  }
+
+  //position
+  //make sure we are working with integer
+  $position_int=(int)$page['position'];
+  if($position_int<=0){
+    $errors[]="Position must be greater than zero";
+  }
+  if($position_int>999){
+    $errors[]="Position must be less than 999.";
+  }
+
+  //visible
+  //make sure we are working with string
+  $visible_str=(string)$page['visible'];
+  if(!has_inclusion_of($visible_str,["0","1"])){
+    $errors[]="Visible must be true or false";
+  }
+
+
+  if(is_blank($page['content'])){
+    $errors[]="Please fill content.";
+  }
+
+
+  return $errors;
+
+}
+
  ?>

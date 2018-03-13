@@ -1,4 +1,5 @@
 <?php require_once('../../../private/intialize.php');
+
 $page_count=find_no_of_pages();
 $subject_count=find_no_of_subject();
 $subject_set=find_all_subjects();
@@ -6,17 +7,23 @@ $page=[];
 $page['menu_name']='';
 $page['visible']='';
 $page['position']=$page_count+1;
+
 if(is_post_request()){
-extract($_POST);
-$page=[];
-$page['menu_name']=$menu_name;
-$page['subject_id']=$subject_id;
-$page['position']=$position;
-$page['visible']=$visible;
-$page['content']=$content;
-$result=insert_page($page);
-$new_id=mysqli_insert_id($db);
-redirect_to(url_for('/staff/pages/show.php?id='.$new_id));
+  extract($_POST);
+  $page=[];
+  $page['menu_name']=$menu_name;
+  $page['subject_id']=$subject_id;
+  $page['position']=$position;
+  $page['visible']=$visible;
+  $page['content']=$content;
+  $result=insert_page($page);
+  if($result === true){
+    $new_id=mysqli_insert_id($db);
+    redirect_to(url_for('/staff/pages/show.php?id='.$new_id));
+  }
+  else{
+    $errors=$result;
+  }
 }
 
 $page_title="Create Pages";
@@ -26,6 +33,7 @@ include(SHARED_PATH.'/staff_header.php');
   <a class="back-link" href="<?php echo url_for('/staff/pages/index.php');?>">&laquo;Back to list</a>
   <div class="page new">
   <h1>Create Pages</h1>
+  <?php echo display_errors($errors); ?>
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>
