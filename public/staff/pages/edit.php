@@ -5,21 +5,27 @@ if(!isset($_GET['id'])){
 }
 
 $id=$_GET['id'];
-$page = find_page_by_id($id);
 $pages_count=find_no_of_pages($id);
 $subject_set=find_all_subjects();
 
 if(is_post_request()){
-extract($_POST);
-$pages=[];
-$pages['id']=$id;
-$pages['subject_id']=$subject_id;
-$pages['menu_name']=$menu_name;
-$pages['position']=$position;
-$pages['visible']=$visible;
-$pages['content']=h($content);
-$result=update_page($pages);
-redirect_to(url_for("/staff/pages/show.php?id=".$id));
+  extract($_POST);
+  $page=[];
+  $page['id']=$id;
+  $page['subject_id']=$subject_id;
+  $page['menu_name']=$menu_name;
+  $page['position']=$position;
+  $page['visible']=$visible;
+  $page['content']=h($content);
+  $result=update_page($page);
+  if($result === true){
+    redirect_to(url_for('/staff/pages/show.php?id='.$id));
+  }
+  else{
+    $errors=$result;
+  }
+}else {
+  $page = find_page_by_id($id);
 }
  ?>
 
@@ -30,6 +36,8 @@ redirect_to(url_for("/staff/pages/show.php?id=".$id));
   <a class="back-link" href="<?php echo url_for('/staff/pages/index.php');?>">&laquo;Back to list</a>
   <div class="page edit">
   <h1>Edit Pages</h1>
+
+  <?php echo display_errors($errors); ?>
   <form class="" action="" method="post">
     <dl>
       <dt>Menu Name</dt>
