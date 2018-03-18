@@ -152,6 +152,16 @@ function find_page_by_id($id){
   return $page;
 }
 
+function find_pages_by_subject_id($subject_id){
+  global $db;
+  $sql ="SELECT * FROM pages ";
+  $sql.= "WHERE id='".db_escape($db,$subject_id)."' ";
+  $sql.="ORDER BY position ASC";
+  $result=mysqli_query($db,$sql);
+  confirm_result_set($result);
+  return $result;
+}
+
 function insert_page($page){
   global $db;
   $errors=validate_page($page);

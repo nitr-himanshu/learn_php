@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Baby Brilliant High School</title>
-  </head>
-  <body>
-    <h1> Baby Brilliant High School</h1>
-  </body>
-</html>
+<?php require_once('../private/intialize.php'); ?>
+
+<?php include(SHARED_PATH.'/public_header.php'); ?>
+
+<div class="" id="main">
+
+  <?php include(SHARED_PATH.'/public_navigation.php'); ?>
+  <div class="" id="page">
+
+  </div>
+
+</div>
+
+<?php include(SHARED_PATH.'/public_footer.php'); ?>
