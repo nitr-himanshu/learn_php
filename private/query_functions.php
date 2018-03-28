@@ -155,7 +155,7 @@ function find_page_by_id($id){
 function find_pages_by_subject_id($subject_id){
   global $db;
   $sql ="SELECT * FROM pages ";
-  $sql.= "WHERE id='".db_escape($db,$subject_id)."' ";
+  $sql.= "WHERE subject_id='".db_escape($db,$subject_id)."' ";
   $sql.="ORDER BY position ASC";
   $result=mysqli_query($db,$sql);
   confirm_result_set($result);
