@@ -1,5 +1,6 @@
 <?php require_once ('../../../private/intialize.php') ?>
 <?php
+require_login();
 $subject_set=find_all_subjects();
 ?>
 <?php $page_title = 'Subjects'; ?>

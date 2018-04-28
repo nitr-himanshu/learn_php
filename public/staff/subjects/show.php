@@ -1,5 +1,7 @@
 <?php require_once('../../../private/intialize.php') ?>
 <?php
+
+require_login();
 //$id = $_GET['id']??'1';//PHP7.0 onwards
 $id = isset($_GET['id']) ? $_GET['id'] : '1'; //for PHP < 7.0
 $subject=find_subject_by_id($id);

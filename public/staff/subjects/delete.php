@@ -1,5 +1,7 @@
 <?php require_once('../../../private/intialize.php');?>
 <?php
+require_login();
+
 if(!isset($_GET['id'])){
   redirect_to(url_for("/staff/subjects/index.php"));
 }
@@ -9,6 +11,7 @@ $subject=find_subject_by_id($id);
 if(is_post_request()){
 extract($_POST);
 $result=delete_subject($id);
+$_SESSION['message']='The subject was deleted successfully';
 redirect_to(url_for("/staff/subjects/index.php"));
 }
 

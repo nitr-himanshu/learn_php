@@ -1,5 +1,7 @@
 <?php require_once('../../../private/intialize.php');?>
 <?php
+require_login();
+
 if(!isset($_GET['id'])){
   redirect_to(url_for("/staff/pages/index.php"));
 }
@@ -9,6 +11,7 @@ $page=find_page_by_id($id);
 if(is_post_request()){
 extract($_POST);
 $result=delete_page($id);
+$_SESSION['message']='The page was deleted successfully';
 redirect_to(url_for("/staff/pages/index.php"));
 }
 

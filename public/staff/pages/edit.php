@@ -1,5 +1,7 @@
 <?php require_once('../../../private/intialize.php');?>
 <?php
+require_login();
+
 if(!isset($_GET['id'])){
   redirect_to(url_for("/staff/pages/index.php"));
 }
@@ -19,6 +21,7 @@ if(is_post_request()){
   $page['content']=h($content);
   $result=update_page($page);
   if($result === true){
+    $_SESSION['message']='The page was udpated successfully';
     redirect_to(url_for('/staff/pages/show.php?id='.$id));
   }
   else{
