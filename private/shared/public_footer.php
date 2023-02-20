@@ -1,5 +1,5 @@
 <footer>
-  <p>Copyright <?php echo date('Y'); ?>, GMHS Bank</p>
+  <p>Copyright <?php echo date('Y'); ?>, nitr-himanshu</p>
 </footer>
 </body>
 </html>

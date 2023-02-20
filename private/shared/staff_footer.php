@@ -1,6 +1,6 @@
 
 <footer>
-  &copy;<?php echo date('Y'); ?> BBHS,Patna
+  &copy;<?php echo date('Y'); ?> nitr-himanshu
 </footer>
 
 
